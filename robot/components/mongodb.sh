@@ -34,3 +34,14 @@ echo -n "STARTING $COMPONENT :"
 systemctl enable mongod   &>> $LOGFILE
 systemctl start mongod    &>> $LOGFILE
 stat $?
+
+
+echo -n "UPDATING $COMPONENT VISIBILITY :"
+sed -i -e's/127.0.0.1/0.0.0.0/' mongod.conf
+stat $?
+
+
+echo -n "PERFORMING DAEMON-RELOAD :"
+systemctl daemon-reload &>> $LOGFILE
+systemctl restart mongod &>> $LOGFILE
+stat $?
