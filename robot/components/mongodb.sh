@@ -5,7 +5,7 @@ echo "i am mongodb"
 COMPONENT=mongodb
 LOGFILE="/tmp/$COMPONENT.log"
 
-set -e
+#set -e
 #validating wether the executed user is root user or not
 ID=$(id -u)
 if [ "$ID" -ne 0 ] ; then 

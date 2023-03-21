@@ -6,7 +6,7 @@ COMPONENT=catalogue
 LOGFILE="/tmp/$COMPONENT.log"
 APPUSER=roboshop
 
-set -e
+#set -e
 #validating wether the executed user is root user or not
 ID=$(id -u)
 if [ "$ID" -ne 0 ] ; then 
@@ -44,7 +44,7 @@ stat $?
 
 echo -n "EXTRACTING THE $COMPONENT IN THE $APPUSER DIRECTORY :"
 cd /home/$APPUSER
-unzip - O /tmp/$COMPONENT.zip    &>> $LOGFILE
+unzip -O /tmp/$COMPONENT.zip    &>> $LOGFILE
 stat $?
 
 
