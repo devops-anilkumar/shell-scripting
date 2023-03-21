@@ -28,7 +28,7 @@ echo -n "INSTALLING NGINX :"
  stat $?
  
  echo -n "DOWNLOADING $COMPONENT :"
- curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"  &>> $LOGFILE 
+ curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"  &>> $LOGFILE 
  stat $?
 
 echo -n "PERFORMING CLEANUP OF OLD $COMPONENT CONTENT :"
