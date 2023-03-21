@@ -44,7 +44,7 @@ stat $?
 
 echo -n "EXTRACTING THE $COMPONENT IN THE $APPUSER DIRECTORY :"
 cd /home/$APPUSER
-unzip -O /tmp/$COMPONENT.zip    &>> $LOGFILE
+unzip - O /tmp/$COMPONENT.zip    &>> $LOGFILE
 stat $?
 
 
