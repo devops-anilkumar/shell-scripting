@@ -27,6 +27,6 @@ stat $?
 
 # systemctl status rabbitmq-server -l
 
-Look for the message: Started RabbitMQ broker
+
 
 
