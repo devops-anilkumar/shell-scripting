@@ -21,7 +21,7 @@ systemctl start rabbitmq-server   &>> $LOGFILE
 stat $?
 
 
-rabbitmqctl list_users | grep $APPUSER
+rabbitmqctl list_users | grep $APPUSER   &>> $LOGFILE
 if [ $? -ne 0 ] ; then
    echo -n "CREATING $COMPONENT APPLICATIoN USER :"
    rabbitmqctl add_user roboshop roboshop123     &>> $LOGFILE
@@ -29,8 +29,8 @@ if [ $? -ne 0 ] ; then
 fi
 
 echo -n "ADDING REQUIRED PREVILAGES TO THE $APPUSER :"
-rabbitmqctl set_user_tags roboshop administrator
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+rabbitmqctl set_user_tags roboshop administrator           &>> $LOGFILE
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"    &>> $LOGFILE
 stat $?
 
 
