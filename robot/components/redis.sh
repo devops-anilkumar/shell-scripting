@@ -28,6 +28,7 @@ stat $?
 
 echo -n "INSTALLING $COMPONENT SERVER :"
 yum install redis-6.2.11 -y     &>> $LOGFILE
+stat $?
 
 echo -n "UPDATING $COMPONENT VISIBILITY :"
 sed -i -e's/127.0.0.1/0.0.0.0/' /etc/redis.conf
