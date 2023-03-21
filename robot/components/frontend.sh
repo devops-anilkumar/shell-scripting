@@ -23,7 +23,7 @@ fi
 }
 
 
-echp -n "INSTALLING NGINX :"
+echo -n "INSTALLING NGINX :"
  yum install nginx -y  &>> $LOGFILE
  stat $?
  
