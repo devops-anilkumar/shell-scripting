@@ -39,7 +39,7 @@ stat $?
 fi
 
 echo -n "DOWNLOADUING THE $COMPONENT :"
-curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
+curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip" &>> $LOGFILE
 stat $?
 
 echo -n "EXTRACTING THE $COMPONENT IN THE $APPUSER DIRECTORY :"
