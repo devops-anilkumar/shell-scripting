@@ -3,7 +3,7 @@
 echo "i am mongodb"
 
 COMPONENT=mongodb
-LOGFILE="/tmp/frontend.log"
+LOGFILE="/tmp/$COMPONENT.log"
 
 set -e
 #validating wether the executed user is root user or not
