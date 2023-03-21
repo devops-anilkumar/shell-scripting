@@ -52,7 +52,7 @@ stat $?
 
 echo -n "EXTRACTING $COMPONENT SCHEMA :"
 cd /tmp
-unzip mongodb.zip   &>> $LOGFILE 
+unzip -o mongodb.zip   &>> $LOGFILE 
 stat $?
 
 echo -n "INJECTING SCHEMA :"
