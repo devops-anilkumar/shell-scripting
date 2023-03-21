@@ -47,6 +47,10 @@ cd /home/$APPUSER
 unzip -O /tmp/$COMPONENT.zip    &>> $LOGFILE
 stat $?
 
+echo -n "CONFIGURING THE PERMISSIONS :"
+mv /home/$APPUSE/$COMPONENT-main /home/$APPUSER/$COMPONENT
+chown -R $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT
+stat $?
 
 # $ mv catalogue-main catalogue
 # $ cd /home/roboshop/catalogue
