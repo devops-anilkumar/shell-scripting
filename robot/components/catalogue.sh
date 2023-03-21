@@ -72,9 +72,4 @@ stat $?
 
 
 
-# $ mv catalogue-main catalogue
-# $ cd /home/roboshop/catalogue
-# $ npm install
-
-
 
