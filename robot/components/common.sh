@@ -48,14 +48,14 @@ stat $?
 
 NPM_INSTALL(){
     echo -n "INSTALLING $COMPONENT APPLICATION :"
-cd /home/$APPUSER/$COMPONENT/
-npm install    &>>$LOGFILE
-stat $?
+    cd /home/$APPUSER/$COMPONENT/
+    npm install    &>>$LOGFILE
+    stat $?
 }
 
 CONFIG_SVC(){
     echo -n "UPDATING THE SYSTEMD FILES WITH DB DETAILS :"
-    sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
+    sed -i -e 's/DBHOST/mysql.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
     mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
     stat $?
 
@@ -66,6 +66,31 @@ CONFIG_SVC(){
     stat $?
 }
 
+MVN_PACKAGE(){
+     echo -n "CREATING $COMPONENT PACKAGE :"
+     cd /home/$APPUSER/$COMPONENT/
+     mvn clean package   &>>$LOGFILE
+     mv target/shipping-1.0.jar shipping.jar
+     stat $?
+
+
+}
+
+JAVA(){
+      echo -n "INSTALLING MAVEN :"
+      yum install maven -y &>> $LOGFILE
+      stat $?
+      # CALLING CREATE_USER FUNCTION
+      CREATE_USER
+
+      # CALLING DOWNLOAD_AND_EXTRACT
+      DOWNLOAD_AND-EXTRACT
+
+      # CALLING MAVEN_PACKAGE FUNCTION
+      MAVEN_PACKAGE
+
+}
+
 NODEJS(){
     echo -n "CONFIGURING NODEJS REPO :"
     curl --silent --location https://rpm.nodesource.com/setup_16.x |  bash -    &>>  $LOGFILE
@@ -74,16 +99,19 @@ NODEJS(){
     echo -n "INSTALLING NODEJS :"
     yum install nodejs -y   &>> $LOGFILE
     stat $?
-    #CALLING CREATE USER FUNCTION
+    # CALLING CREATE USER FUNCTION
     CREATE_USER
 
-    #CALLING DOWNLOAD_AND_EXTRACT
+    # CALLING DOWNLOAD_AND_EXTRACT
     DOWNLOAD_AND_EXTRACT
 
-    #CALLING NPM_INSTALL
+    # CALLING NPM_INSTALL
     NPM_INSTALL
 
-    #CALLING CONFIG_SVC
+    # CALLING CONFIG_SVC
+    CONFIG_SVC
+
+    # CALLING CONFIG_SVC
     CONFIG_SVC
 
 }
