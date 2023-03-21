@@ -16,8 +16,9 @@ yum install rabbitmq-server -y   &>>  $LOGFILE
 stat $?
 
 echo -n "STARTING $COMPONENT :"
-systemctl enable rabbitmq-server 
-systemctl start rabbitmq-server
+systemctl enable rabbitmq-server  &>> $LOGFILE
+systemctl start rabbitmq-server   &>> $LOGFILE
+stat $?
 
 echo -n "CREATING $COMPONENT APPLICATIN USER :"
 rabbitmqctl add_user roboshop roboshop123     &>> $LOGFILE
