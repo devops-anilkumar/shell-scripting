@@ -24,7 +24,7 @@ fi
 }
 
 echo -n "CONFIGURING NODEJS REPO :"
-curl --silent --location https://rpm.nodesource.com/setup_16.x |  bash -
+curl --silent --location https://rpm.nodesource.com/setup_16.x |  bash -    &>>  $LOGFILE
 stat $?
 
 echo -n "INSTALLING NODEJS :"
