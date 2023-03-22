@@ -46,7 +46,7 @@ if [ $? -eq 0 ] ; then
 fi
 
 echo -n "DOWNLOADING $COMPONENT SCHEMA :"
-curl -s -L -o /tmp/mysql.zip "https://github.com/stans-robot-project/mysql/archive/main.zip"  &>> $LOGFILE
+curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"  &>> $LOGFILE
 stat $?
 
 echo -n "EXTRACTING THE $COMPONENT SCHEMA :"
