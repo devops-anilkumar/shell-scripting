@@ -96,7 +96,7 @@ PYTHON() {
     GROUPID=$(id -g roboshop)
     echo -n "UPDATING $COMPONENT.ini FILE :"
     #sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}"  /home/$APPUSER/$COMPONENT/$COMPONENT.ini
-    sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}" /home/$APPUSER/$COMPONENT/$COMPONENT.ini 
+    sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}"  /home/$APPUSER/$COMPONENT/$COMPONENT.ini
     stat $? 
 
     # CALLING CONFIG_SVC FUNCTION
