@@ -38,7 +38,7 @@ sed -i -e's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf
 stat $?
 
 echo -n "PERFORMING DAEMON-RELOAD :"
-systemctl daemon-reload       &>> $LOGFILE
-systemctl enable $COMPONENT   &>>  $LOGFILE
+systemctl daemon-reload   &>> $LOGFILE
+systemctl enable $COMPONENT  &>>  $LOGFILE
 systemctl restart $COMPONENT  &>> $LOGFILE
 stat $?
