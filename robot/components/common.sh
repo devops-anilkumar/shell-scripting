@@ -95,7 +95,7 @@ PYTHON() {
     USEDID=$(id -u roboshop)
     GROUPID=$(id -g roboshop)
     echo -n "UPDATING $COMPONENT.ini FILE :"
-    sed -e "/^uid/ c uid=${USERID}" sed -e "/^gid/ c gid=${GROUPID}" /home/$APPUSER/$COMPONENT/$COMPONENT.ini  &>> $LOGFILE
+    sed -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}" /home/$APPUSER/$COMPONENT/$COMPONENT.ini  &>> $LOGFILE
 
     # CALLING CONFIG_SVC FUNCTION
     CONFIG_SVC
