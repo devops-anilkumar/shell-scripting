@@ -55,7 +55,6 @@ NPM_INSTALL(){
 
 CONFIG_SVC(){
     echo -n "UPDATING THE SYSTEMD FILES WITH DB DETAILS :"
-    #sed -i -e 's/AMQPHOST/rabbitmq.roboshop.internal/' -e 's/USERHOST/user.roboshop.internal/'  -e  's/CARTHOST/cart.roboshop.internal/' -e  's/DBHOST/mysql.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
     sed -i -e 's/AMQPHOST/rabbitmq.roboshop.internal/' -e 's/USERHOST/user.roboshop.internal/' -e 's/CARTHOST/cart.roboshop.internal/' -e 's/DBHOST/mysql.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
     mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
     stat $?
@@ -88,14 +87,13 @@ PYTHON() {
     DOWNLOAD_AND_EXTRACT
   
     echo -n "INSTALLING $COMPONENT :"
-    cd /home/roboshop/$COMPONENT
+    cd /home/$APPUSER/$COMPONENT
     pip3 install -r requirements.txt   &>> $LOGFILE
     stat $?
 
     USERID=$(id -u roboshop)
     GROUPID=$(id -g roboshop)
     echo -n "UPDATING $COMPONENT.ini FILE :"
-    #sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}"  /home/$APPUSER/$COMPONENT/$COMPONENT.ini
     sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}"  /home/$APPUSER/$COMPONENT/$COMPONENT.ini
     stat $? 
 
@@ -103,33 +101,6 @@ PYTHON() {
     CONFIG_SVC
 
 }
-# PYTHON() {
-#     echo -n "Installing Python and dependencies :"
-#     yum install python36 gcc python3-devel -y  &>> $LOGFILE
-#     stat $?
-
-#     # Calling Create-User Functon 
-#     CREATE_USER
-
-#     # Calling Download_And_Extract Function
-#     DOWNLOAD_AND_EXTRACT
-
-#     echo -n "Installing $COMPONENT :"
-#     cd /home/roboshop/$COMPONENT/ 
-#     pip3 install -r requirements.txt   &>> $LOGFILE 
-#     stat $? 
-
-#     USERID=$(id -u roboshop)
-#     GROUPID=$(id -g roboshop)
-    
-#     echo -n "Updating the $COMPONENT.ini file :"
-#     sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}"  /home/$APPUSER/$COMPONENT/$COMPONENT.ini 
-
-#     # Calling Config-Svc Function
-#     CONFIG_SVC
-
-# }
-
 
 JAVA(){
       echo -n "INSTALLING MAVEN :"
