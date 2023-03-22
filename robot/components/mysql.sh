@@ -26,16 +26,24 @@ stat $?
 #this should only run for the first time or when the default password is not changed
 echo -n "show databases;" | mysql -uroot -pRoboShop@1  &>> $LOGFILE
 if [ $? -ne 0 ] ; then
-echo -n "PASWORD RESET OF ROOT USER :"
-mysql --connect-expired-password -uroot -p${DEFAULT_ROOT-PWS}
-echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_ROOT-PWS}  &>> $LOGFILE
-stat $?
+    echo -n "PASWORD RESET OF ROOT USER :"
+    mysql --connect-expired-password -uroot -p${DEFAULT_ROOT-PWS}
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_ROOT-PWS}  &>> $LOGFILE
+    stat $?
 fi
 
 #Ensure you run this only when the password validation plugin exist
-echo -n "UNINSTALLING PASWORD VALIDATION PLUGIN :"
-echo -n "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1  &>> $LOGFILE
-stat $?
+echo -n "show plugins;" | mysql -uroot -pRoboShop@1 | grep validate_password   &>> $LOGFILE
+if [ $? -eq 0 ] ; then
+    # echo -n "PASWORD RESET OF ROOT USER :"
+    # mysql --connect-expired-password -uroot -p${DEFAULT_ROOT-PWS}
+    # echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_ROOT-PWS}  &>> $LOGFILE
+    # stat $?
+
+   echo -n "UNINSTALLING PASWORD VALIDATION PLUGIN :"
+   echo -n "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1  &>> $LOGFILE
+   stat $?
+fi
 
 
 
