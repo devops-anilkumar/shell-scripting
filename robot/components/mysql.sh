@@ -27,7 +27,7 @@ stat $?
 echo "show databases;" | mysql -uroot -pRoboShop@1  &>> $LOGFILE
 if [ $? -ne 0 ] ; then
     echo -n "PASWORD RESET OF ROOT USER :"
-    mysql --connect-expired-password -uroot -p${DEFAULT_ROOT_PWS}
+    mysql --connect-expired-password -uroot -p${DEFAULT_ROOT_PWS}   &>> $LOGFILE
     echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_ROOT_PWS}  &>> $LOGFILE
     stat $?
 fi
