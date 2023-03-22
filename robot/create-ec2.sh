@@ -7,7 +7,7 @@ if [ -z "$1" ] ; then
     exit 1
 fi
 
-
+HOSTEDZONEID="Z01019823KGEEYKYEE9GQ"
 COMPONENT=$1
 
 AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=DevOps-LabImage-CentOS7" | jq '.Images[].ImageId' |sed -e 's/"//g')
@@ -18,5 +18,8 @@ echo -n "LAUNCHING THE INSTANCE WITH $AMI_ID AS AMI :"
 aws ec2 run-instances --image-id $AMI_ID  \
                       --instance-type t2.micro \
                      --security-group-ids ${SGID}  \
-                     --instance-market-options "MarketType=spot, SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}" \
-                     --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$COMPONENT}]" | jq
+                     --instance-market-options "MarketType=spot, SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}"  \
+                     --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$COMPONENT}]" | jq '.Instances[].PrivateIpAddress' | sed -e 's/"// g')
+
+ sed -e 's/COMPONENT/$COMPONENT/" -e "s/IPADDRESS/$(IPADDRESS)/" record.json > /tmp/r53.json
+ aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file://sample.json
