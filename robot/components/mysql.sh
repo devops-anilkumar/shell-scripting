@@ -20,7 +20,7 @@ systemctl start mysqld    &>>  $LOGFILE
 stat $?
 
 echo -n "GRAB $COMPONENT DEFAULT PASSWORD :"
-DEFAULT_ROOT_PWS=$(sudo grep "temporary password" /var/log/mysqld.log | awk -F ':' '{print $NF}')
+DEFAULT_ROOT_PWS=$(sudo grep "temporary password" /var/log/mysqld.log | awk -F '{print $NF}')
 stat $?
 
 #this should only run for the first time or when the default password is not changed
@@ -32,6 +32,7 @@ echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --conne
 stat $?
 fi
 
+#Ensure you run this only when the password validation plugin exist
 echo -n "UNINSTALLING PASWORD VALIDATION PLUGIN :"
 echo -n "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1  &>> $LOGFILE
 stat $?
