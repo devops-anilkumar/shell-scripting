@@ -55,10 +55,10 @@ unzip -O /tmp/$COMPONENT.zip  &>> $LOGFILE
 stat $?
 
 echo -n "INJECTING THE SCHEMA :"
-# cd mysql-main
- mysql -u root -pRoboShop@1 <shipping.sql  &>> $LOGFILE
- stat $?
- 
+cd $COMPONENT-main
+mysql -u root -pRoboShop@1 <shipping.sql  &>> $LOGFILE
+stat $?
+
 
 
 
