@@ -61,7 +61,7 @@ CONFIG_SVC(){
 
     echo -n "STARTING THE $COMPONENT SERVICE :"
     systemctl daemon-reload      &>> $LOGFILE
-    #systemctl enable $COMPONENT   &>> $LOGFILE
+    systemctl enable $COMPONENT   &>> $LOGFILE
     systemctl restart $COMPONENT  &>> $LOGFILE
     stat $?
 }
