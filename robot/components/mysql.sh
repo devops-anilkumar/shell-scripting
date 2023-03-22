@@ -25,5 +25,5 @@ stat $?
 
 echo -n "PASWORD RESET OF ROOT USER :"
 mysql --connect-expired-password -uroot -p${DEFAULT_ROOT-PWS}
-echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_ROOT-PWS}
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_ROOT-PWS}  &>> $LOGFILE
 stat $?
