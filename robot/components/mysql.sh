@@ -24,7 +24,7 @@ DEFAULT_ROOT_PWS=$(sudo grep "temporary password" /var/log/mysqld.log | awk '{pr
 stat $?
 
 #this should only run for the first time or when the default password is not changed
-echo -n "show databases;" | mysql -uroot -pRoboShop@1  &>> $LOGFILE
+echo "show databases;" | mysql -uroot -pRoboShop@1  &>> $LOGFILE
 if [ $? -ne 0 ] ; then
     echo -n "PASWORD RESET OF ROOT USER :"
     mysql --connect-expired-password -uroot -p${DEFAULT_ROOT-PWS}
@@ -33,7 +33,7 @@ if [ $? -ne 0 ] ; then
 fi
 
 #Ensure you run this only when the password validation plugin exist
-echo -n "show plugins;" | mysql -uroot -pRoboShop@1 | grep validate_password   &>> $LOGFILE
+echo "show plugins;" | mysql -uroot -pRoboShop@1 | grep validate_password   &>> $LOGFILE
 if [ $? -eq 0 ] ; then
     # echo -n "PASWORD RESET OF ROOT USER :"
     # mysql --connect-expired-password -uroot -p${DEFAULT_ROOT-PWS}
@@ -41,7 +41,7 @@ if [ $? -eq 0 ] ; then
     # stat $?
 
    echo -n "UNINSTALLING PASWORD VALIDATION PLUGIN :"
-   echo -n "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1  &>> $LOGFILE
+   echo "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1  &>> $LOGFILE
    stat $?
 fi
 
