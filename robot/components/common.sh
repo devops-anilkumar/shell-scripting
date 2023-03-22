@@ -92,8 +92,8 @@ PYTHON() {
     pip3 install -r requirements.txt   &>> $LOGFILE
     stat $?
 
-    USEDID =$(id -u roboshop)
-    GROUPID =$(id -g roboshop)
+    USEDID=$(id -u roboshop)
+    GROUPID=$(id -g roboshop)
     echo -n "UPDATING $COMPONENT.ini FILE :"
     sed -e "/^uid/ c uid=${USERID}" sed -e "/^gid/ c gid=${GROUPID}" /home/$APPUSER/$COMPONENT/$COMPONENT.ini
 
