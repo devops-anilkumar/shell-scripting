@@ -19,3 +19,11 @@ systemctl enable mysqld  &>> $LOGFILE
 systemctl start mysqld    &>>  $LOGFILE
 stat $?
 
+echo -n "GRAB $COMPONENT DEFAULT PASSWORD :"
+DEFAULT_ROOT_PWS=$(sudo grep "temporary password" /var/log/mysqld.log | awk -F ':' '{print $NF}')
+stat $?
+
+echo -n "PASWORD RESET OF ROOT USER :"
+mysql --connect-expired-password -uroot -p${DEFAULT_ROOT-PWS}
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_ROOT-PWS}
+stat $?
