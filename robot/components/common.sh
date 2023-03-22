@@ -76,58 +76,58 @@ MVN_PACKAGE(){
 
 
 }
-# PYTHON() {
-#     echo -n "INSTALLING PYTHON AND DEPENDANCIES :"
-#     yum install python36 gcc python3-devel -y  &>> $LOGFILE
-#     stat $?
-
-#     # CALLING CREATE_USER FUNCTION
-#     CREATE_USER
-
-#     # CALLING DOWNLOAD_AND_EXTRACT FUNCTION
-#     DOWNLOAD_AND_EXTRACT
-  
-#     echo -n "INSTALLING $COMPONENT :"
-#     cd /home/roboshop/payment 
-#     pip3 install -r requirements.txt   &>> $LOGFILE
-#     stat $?
-
-#     USEDID=$(id -u roboshop)
-#     GROUPID=$(id -g roboshop)
-#     echo -n "UPDATING $COMPONENT.ini FILE :"
-#     #sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}"  /home/$APPUSER/$COMPONENT/$COMPONENT.ini
-#     sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}" /home/$APPUSER/$COMPONENT/$COMPONENT.ini  
-
-#     # CALLING CONFIG_SVC FUNCTION
-#     CONFIG_SVC
-
-# }
 PYTHON() {
-    echo -n "Installing Python and dependencies :"
+    echo -n "INSTALLING PYTHON AND DEPENDANCIES :"
     yum install python36 gcc python3-devel -y  &>> $LOGFILE
     stat $?
 
-    # Calling Create-User Functon 
+    # CALLING CREATE_USER FUNCTION
     CREATE_USER
 
-    # Calling Download_And_Extract Function
+    # CALLING DOWNLOAD_AND_EXTRACT FUNCTION
     DOWNLOAD_AND_EXTRACT
+  
+    echo -n "INSTALLING $COMPONENT :"
+    cd /home/roboshop/$COMPONENT
+    pip3 install -r requirements.txt   &>> $LOGFILE
+    stat $?
 
-    echo -n "Installing $COMPONENT :"
-    cd /home/roboshop/$COMPONENT/ 
-    pip3 install -r requirements.txt   &>> $LOGFILE 
-    stat $? 
-
-    USERID=$(id -u roboshop)
+    USEDID=$(id -u roboshop)
     GROUPID=$(id -g roboshop)
-    
-    echo -n "Updating the $COMPONENT.ini file :"
-    sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}"  /home/$APPUSER/$COMPONENT/$COMPONENT.ini 
+    echo -n "UPDATING $COMPONENT.ini FILE :"
+    #sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}"  /home/$APPUSER/$COMPONENT/$COMPONENT.ini
+    sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}" /home/$APPUSER/$COMPONENT/$COMPONENT.ini  
 
-    # Calling Config-Svc Function
+    # CALLING CONFIG_SVC FUNCTION
     CONFIG_SVC
 
 }
+# PYTHON() {
+#     echo -n "Installing Python and dependencies :"
+#     yum install python36 gcc python3-devel -y  &>> $LOGFILE
+#     stat $?
+
+#     # Calling Create-User Functon 
+#     CREATE_USER
+
+#     # Calling Download_And_Extract Function
+#     DOWNLOAD_AND_EXTRACT
+
+#     echo -n "Installing $COMPONENT :"
+#     cd /home/roboshop/$COMPONENT/ 
+#     pip3 install -r requirements.txt   &>> $LOGFILE 
+#     stat $? 
+
+#     USERID=$(id -u roboshop)
+#     GROUPID=$(id -g roboshop)
+    
+#     echo -n "Updating the $COMPONENT.ini file :"
+#     sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}"  /home/$APPUSER/$COMPONENT/$COMPONENT.ini 
+
+#     # Calling Config-Svc Function
+#     CONFIG_SVC
+
+# }
 
 
 JAVA(){
