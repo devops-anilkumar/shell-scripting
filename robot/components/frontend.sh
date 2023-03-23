@@ -46,7 +46,7 @@ stat $?
 
 
 for component in catalogue cart user shipping payment; do
-     echo -n "updating the proxy details in the reverse proxy file :"
+    # echo -n "updating the proxy details in the reverse proxy file :"
      sed -i "/$COMPONENT/s/localhost/$COMPONENT.roboshop.internal/" /etc/nginx/default.d/roboshop.conf
 done
 
