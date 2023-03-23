@@ -10,7 +10,7 @@ fi
 HOSTEDZONEID="Z01019823KGEEYKYEE9GQ"
 COMPONENT=$1
 
-AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=DevOps-LabImage-CentOS7" | jq '.Images[].ImageId' |sed -e 's/"//g')
+AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=DevOps-LabImage-CentOS7" | jq '.Images[].ImageId' | sed -e 's/"//g')
 SGID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=awslab-security | jq ".SecurityGroups[].GroupId" | sed -e 's/"//g')
 echo "Ami ID is $AMI_ID "
 
@@ -24,5 +24,4 @@ echo $IPADDRESS
 sed -e "s/COMPONENT/${COMPONENT}/" -e "s/IPADDRESS/${IPADDRESS}" robot/record.json > /tmp/r53.json
 aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file:///tmp/record.json | jq
 
-# sed -e "s/COMPONENT/${COMPONENT}/" -e  "s/IPADDRESS/${IPADDRESS}/" robot/record.json > /tmp/record.json
-# aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file:///tmp/record.json | jq 
+
