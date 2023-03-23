@@ -15,7 +15,8 @@ SGID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=awslab-
 echo "Ami ID is $AMI_ID "
 
 echo -n "LAUNCHING THE INSTANCE WITH $AMI_ID AS AMI :"
-IPADDRESS=$(aws ec2 run-instances --image-id $AMI_ID  \
+IPADDRESS=$(aws ec2 run-instances \
+                     --image-id $AMI_ID  \
                      --instance-type t2.micro  \
                      --security-group-ids ${SGID}  \
                      --instance-market-options "MarketType=spot, SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}" \
