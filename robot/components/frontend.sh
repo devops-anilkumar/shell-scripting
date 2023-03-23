@@ -50,7 +50,6 @@ for component in catalogue cart user shipping payment; do
       sed -i "/$COMPONENT/s/localhost/$COMPONENT.roboshop.internal/" /etc/nginx/default.d/roboshop.conf
 done
 
-
 echo -n "STARTING THE SERVICE :"
 systemctl enable nginx &>> $LOGFILE
 systemctl start nginx  &>> $LOGFILE
