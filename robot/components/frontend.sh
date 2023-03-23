@@ -51,5 +51,5 @@ done
 
 echo -n "STARTING THE SERVICE :"
 systemctl enable nginx &>> $LOGFILE
-systemctl start nginx  &>> $LOGFILE
+systemctl restart nginx  &>> $LOGFILE
 stat $?
